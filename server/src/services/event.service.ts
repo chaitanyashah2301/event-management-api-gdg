@@ -20,12 +20,94 @@ export const createEvent = async (
   });
 };
 
-export const getAllEvents = async () => {
-  return prisma.event.findMany({
+export const getAllEvents = async (
+  search?: string,
+  category?: string,
+  page = 1,
+  limit = 10
+) => {
+  const skip = (page - 1) * limit;
+
+  const events = await prisma.event.findMany({
+    where: {
+      AND: [
+        search
+          ? {
+              OR: [
+                {
+                  title: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  description: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+              ],
+            }
+          : {},
+        category
+          ? {
+              category: {
+                equals: category,
+                mode: "insensitive",
+              },
+            }
+          : {},
+      ],
+    },
     orderBy: {
       dateTime: "asc",
     },
+    skip,
+    take: limit,
   });
+
+  const total = await prisma.event.count({
+    where: {
+      AND: [
+        search
+          ? {
+              OR: [
+                {
+                  title: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+                {
+                  description: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+              ],
+            }
+          : {},
+        category
+          ? {
+              category: {
+                equals: category,
+                mode: "insensitive",
+              },
+            }
+          : {},
+      ],
+    },
+  });
+
+  return {
+    events,
+    pagination: {
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
 };
 
 export const getEventById = async (id: number) => {

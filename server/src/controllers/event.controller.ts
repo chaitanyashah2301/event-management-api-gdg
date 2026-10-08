@@ -37,9 +37,34 @@ export const getAll = async (
   next: NextFunction
 ) => {
   try {
-    const events = await eventService.getAllEvents();
+    const search =
+      typeof req.query.search === "string"
+        ? req.query.search
+        : undefined;
 
-    res.status(200).json(events);
+    const category =
+      typeof req.query.category === "string"
+        ? req.query.category
+        : undefined;
+
+    const page =
+      typeof req.query.page === "string"
+        ? Number(req.query.page)
+        : 1;
+
+    const limit =
+      typeof req.query.limit === "string"
+        ? Number(req.query.limit)
+        : 10;
+
+    const result = await eventService.getAllEvents(
+      search,
+      category,
+      page,
+      limit
+    );
+
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
