@@ -31,6 +31,23 @@ export const errorHandler = (
             error: "User not found",
         });
     }
+    if (error.message === "Already registered for this event") {
+        return res.status(409).json({
+            error: "Already registered for this event",
+        });
+    }
+
+    if (error.message === "Event is full") {
+        return res.status(409).json({
+            error: "Event is full",
+        });
+    }
+
+    if (error.message === "Registration not found") {
+        return res.status(404).json({
+            error: "Registration not found",
+        });
+    }
 
     res.status(500).json({
         error: "Internal server error",

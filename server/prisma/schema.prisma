@@ -26,6 +26,8 @@ model User {
   role         Role     @default(USER)
   createdAt    DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  
+  registrations Registration[]
 }
 
 model Event {
@@ -38,4 +40,19 @@ model Event {
   createdAt     DateTime @default(now())
   updatedAt    DateTime @updatedAt
   venue String
+
+  registrations Registration[]
+}
+
+
+model Registration {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventId   Int
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
 }
