@@ -1,7 +1,7 @@
 import { prisma } from "../lib/prisma";
 import { hashPassword, comparePassword } from "../utils/password";
 import { generateToken } from "../utils/jwt";
-import { error } from "node:console";
+// import { error } from "node:console";
 
 export const registerUser = async (
     name: string,
