@@ -41,6 +41,16 @@ GATHER is a full-stack TypeScript project. I picked each technology for a specif
 - **Independent deployment.** The frontend and backend are separate apps with separate `package.json` files, so each can be built, deployed and scaled on its own.
 - **Skills worth building.** These are widely used in industry, so the project doubles as practice with tools commonly found in real teams.
 
+  ## Screenshots
+Landing Page
+<img width="1918" height="834" alt="image" src="https://github.com/user-attachments/assets/d79eafec-353c-4cc5-97af-a34c2875572c" />
+
+Events View 
+<img width="1644" height="956" alt="image" src="https://github.com/user-attachments/assets/9e56e4ba-c57f-402f-be2d-5258aaa409e8" />
+
+Admin Dashboard (To add,edit and delete events)
+<img width="1264" height="779" alt="image" src="https://github.com/user-attachments/assets/8a4ca3a1-0dda-4377-96f7-41226f71ec95" />
+
 
 ## 🛠️ Installation Guide (for Reviewers)
 
@@ -215,7 +225,11 @@ Browser -> client/next.config.ts (rewrite) -> server/src/routes -> middlewares
 
 ---
 
-## Screenshots
+
+
+
+
+
 
 
 
