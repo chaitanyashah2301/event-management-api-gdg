@@ -1,3 +1,5 @@
+
+
 Tech Stack
 
 GATHER is a full-stack TypeScript project. I picked each technology for a specific reason, and the choices were also meant to work well together.
@@ -50,6 +52,10 @@ Events View
 
 Admin Dashboard (To add,edit and delete events)
 <img width="1264" height="779" alt="image" src="https://github.com/user-attachments/assets/8a4ca3a1-0dda-4377-96f7-41226f71ec95" />
+
+Analytics page (add /analytics at the end of the admin page url)
+<img width="747" height="973" alt="image" src="https://github.com/user-attachments/assets/f61bf3e4-d33e-4fa2-bbe7-391f4345c06c" />
+
 
 
 ## 🛠️ Installation Guide (for Reviewers)
@@ -225,6 +231,90 @@ Browser -> client/next.config.ts (rewrite) -> server/src/routes -> middlewares
 
 ---
 
+## API Documentation
+
+**Base URL:** `https://gather-api-46wj.onrender.com/api` (local: `http://localhost:5000/api`)
+
+Bodies are JSON. Protected routes need `Authorization: Bearer <token>`. Tokens come from register or login and last 7 days.
+
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `POST` | `/auth/register` | Public | Create an account, returns `{ user, token }` |
+| `POST` | `/auth/login` | Public | Sign in, returns `{ user, token }` |
+| `GET` | `/auth/me` | User | Current user's profile |
+| `GET` | `/events` | Public | List events (`search`, `category`, `page`, `limit`) |
+| `GET` | `/events/:id` | Public | Get one event |
+| `POST` | `/events` | Admin | Create an event |
+| `PUT` | `/events/:id` | Admin | Update an event |
+| `DELETE` | `/events/:id` | Admin | Delete an event and its registrations |
+| `GET` | `/registrations/me` | User | My registrations, with event details |
+| `POST` | `/registrations/events/:id` | User | Register for an event |
+| `DELETE` | `/registrations/events/:id` | User | Cancel a registration |
+| `GET` | `/analytics/overview` | Admin | Dashboard statistics |
+
+### Key request and response shapes
+
+**Register / login**
+
+```json
+// POST /auth/register
+{ "name": "Ada Lovelace", "email": "ada@example.com", "password": "<password>" }
+
+// POST /auth/login
+{ "email": "ada@example.com", "password": "<password>" }
+
+// Response (201 on register, 200 on login)
+{ "user": { "id": 1, "name": "Ada Lovelace", "email": "ada@example.com", "role": "USER" }, "token": "<jwt>" }
+```
+
+**Create / update event** (`PUT` accepts any subset)
+
+```json
+{
+  "title": "React Workshop",
+  "description": "Hands-on intro to React.",
+  "dateTime": "2026-11-15T10:00:00.000Z",
+  "venue": "Main Auditorium",
+  "capacity": 50,
+  "category": "Workshop"
+}
+```
+
+**List events:** `GET /events?search=react&category=Workshop&page=1&limit=10`, sorted by date, soonest first.
+
+```json
+{
+  "events": [ { "id": 1, "title": "React Workshop", "capacity": 50, "category": "Workshop", "...": "..." } ],
+  "pagination": { "page": 1, "limit": 10, "total": 1, "totalPages": 1 }
+}
+```
+
+**Registering:** capacity is checked inside a Serializable transaction, so the last spot can't be given to two people.
+
+### Status codes
+
+| Code | Meaning |
+|---|---|
+| `200` / `201` / `204` | Success / created / success with no body (deletes) |
+| `401` | Missing, invalid or expired token, or wrong credentials |
+| `403` | Signed in, but not an admin |
+| `404` | Event, user or registration not found |
+| `409` | Conflict: user already exists, already registered, or event full |
+| `500` | Unexpected error (malformed bodies currently land here too) |
+
+Errors always look like `{ "error": "Event is full" }`.
+
+### Example (PowerShell)
+
+```powershell
+$api = "https://gather-api-46wj.onrender.com/api"
+
+$body  = @{ email = "<EMAIL>"; password = "<PASSWORD>" } | ConvertTo-Json
+$login = Invoke-RestMethod -Method Post -Uri "$api/auth/login" -ContentType "application/json" -Body $body
+
+Invoke-RestMethod -Method Post -Uri "$api/registrations/events/1" `
+  -Headers @{ Authorization = "Bearer $($login.token)" }
+```
 
 
 
