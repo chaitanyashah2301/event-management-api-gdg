@@ -58,7 +58,7 @@ Analytics page (add /analytics at the end of the admin page url)
 
 
 
-## 🛠️ Installation Guide (for Reviewers)
+##  Installation Guide
 
 
 This repository contains **two separate apps**, each with its **own `package.json`**. Dependencies are installed in `server/` and `client/` independently. There is no root-level install.
@@ -224,12 +224,6 @@ Browser -> client/next.config.ts (rewrite) -> server/src/routes -> middlewares
         -> controllers -> services -> Prisma -> PostgreSQL (Neon)
 ```
 
-
-## Demo Video
-
-
-
----
 
 ## API Documentation
 
