@@ -1,6 +1,6 @@
 
 
-Tech Stack
+## Tech Stack
 
 GATHER is a full-stack TypeScript project. I picked each technology for a specific reason, and the choices were also meant to work well together.
 
@@ -53,7 +53,7 @@ Events View
 Admin Dashboard (To add,edit and delete events)
 <img width="1264" height="779" alt="image" src="https://github.com/user-attachments/assets/8a4ca3a1-0dda-4377-96f7-41226f71ec95" />
 
-Analytics page (add /analytics at the end of the admin page url)
+Analytics page (add /analytics at the end of the admin page url) (Bonus feature ⭐)
 <img width="747" height="973" alt="image" src="https://github.com/user-attachments/assets/f61bf3e4-d33e-4fa2-bbe7-391f4345c06c" />
 
 
@@ -88,19 +88,12 @@ Commands below are for **Windows PowerShell**. macOS/Linux equivalents are noted
 | `jsonwebtoken` | ^9.0.3 | Issue and verify JWTs |
 | `bcrypt` | ^6.0.0 | Password hashing |
 | `dotenv` | ^18.0.6 | Load `.env` variables |
-| `cors` | ^2.8.6 | CORS middleware (installed; not currently wired in) |
-| `bcryptjs` | ^3.0.3 | Installed but unused (code uses `bcrypt`) |
 
 | Dev package | Version | Purpose |
 |---|---|---|
 | `typescript` | 5.9 | Compiler |
 | `prisma` | ^6.19.3 | Schema, migrations, client generation |
 | `tsx` | ^4.23.15 | Runs TypeScript directly in dev (`npm run dev`) |
-| `nodemon` | ^3.1.14 | Dev tooling |
-| `@types/node` | ^26.6.4 | Node typings |
-| `@types/express` | ^5.0.6 | Express typings |
-| `@types/jsonwebtoken` | ^9.0.10 | JWT typings |
-| `@types/bcrypt` | ^6.0.0 | bcrypt typings |
 
 #### Frontend (`client/package.json`)
 
@@ -108,18 +101,12 @@ Commands below are for **Windows PowerShell**. macOS/Linux equivalents are noted
 |---|---|---|
 | `next` | 16.4.0 | Framework (App Router) |
 | `react` | 19.3.0 | UI library |
-| `react-dom` | 19.3.0 | React DOM renderer |
 
 | Dev package | Version | Purpose |
 |---|---|---|
 | `tailwindcss` | ^4 | Styling |
-| `@tailwindcss/turbopack` | ^4 | Tailwind loader for Turbopack |
 | `typescript` | ^5 | Compiler |
 | `eslint` | ^9 | Linting |
-| `eslint-config-next` | 16.4.0 | Next.js lint rules |
-| `@types/node` | ^20 | Node typings |
-| `@types/react` | ^19 | React typings |
-| `@types/react-dom` | ^19 | React DOM typings |
 
 ### 3. Create a free database (Neon)
 
@@ -252,13 +239,13 @@ Bodies are JSON. Protected routes need `Authorization: Bearer <token>`. Tokens c
 
 ```json
 // POST /auth/register
-{ "name": "Ada Lovelace", "email": "ada@example.com", "password": "<password>" }
+{ "name": "ezio", "email": "exa@example.com", "password": "<password>" }
 
 // POST /auth/login
-{ "email": "ada@example.com", "password": "<password>" }
+{ "email": "exa@example.com", "password": "<password>" }
 
 // Response (201 on register, 200 on login)
-{ "user": { "id": 1, "name": "Ada Lovelace", "email": "ada@example.com", "role": "USER" }, "token": "<jwt>" }
+{ "user": { "id": 1, "name": "ezio", "email": "exa@example.com", "role": "USER" }, "token": "<jwt>" }
 ```
 
 **Create / update event** (`PUT` accepts any subset)
