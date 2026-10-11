@@ -205,9 +205,6 @@ export default function Home() {
 
           <div className="mt-10 flex flex-col justify-between gap-8 border-t border-white/20 pt-5 sm:flex-row sm:items-end">
             <p className="max-w-md text-base leading-7 text-white/60 md:text-lg">
-              A running index of things worth showing up for. Ideas,
-              experiments, late nights, new people. Find your next reason to
-              leave the room.
             </p>
 
             <a
@@ -222,7 +219,7 @@ export default function Home() {
         {/* Graphic panel */}
         <div className="relative hidden min-h-[480px] overflow-hidden border border-white/15 bg-[#1B1B18] md:block">
           <div className="absolute left-7 top-7 text-xs font-bold tracking-[0.2em] text-white/50">
-            FIG. 001 — COMMUNITY
+            
           </div>
 
           <div className="absolute inset-0 flex items-center justify-center">
@@ -230,7 +227,7 @@ export default function Home() {
               <div className="absolute h-56 w-56 rounded-full border border-white/30" />
               <div className="absolute h-40 w-40 rounded-full bg-[#F04E23]" />
               <span className="relative z-10 text-7xl font-black tracking-[-0.1em] text-black">
-                G/
+                ✌️
               </span>
               <span className="absolute -right-8 top-8 bg-[#D5FF00] px-3 py-2 text-xs font-black text-black">
                 OPEN TO ALL
@@ -240,11 +237,11 @@ export default function Home() {
 
           <div className="absolute bottom-7 left-7 right-7 flex items-end justify-between border-t border-white/20 pt-4">
             <p className="max-w-[180px] text-sm leading-5 text-white/60">
-              Different minds.
+              
               <br />
-              Shared spaces.
+             
             </p>
-            <span className="text-4xl text-[#F04E23]">↗</span>
+            <span className="text-4xl text-[#F04E23]"></span>
           </div>
         </div>
       </section>
@@ -409,7 +406,7 @@ export default function Home() {
             GATHER<span className="text-[#F04E23]">/</span>
           </p>
           <p className="text-xs tracking-wide text-white/45">
-            MADE FOR PEOPLE WHO MAKE THINGS.
+            
           </p>
           <a
             href="#"
