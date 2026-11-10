@@ -1,0 +1,16 @@
+www.chaitanyashah.dev, chaitanyashah.dev {
+    handle /api/* {
+        reverse_proxy api:5000 172.31.18.170:5000 {
+            lb_policy round_robin
+            health_uri /api/health
+            health_interval 10s
+        }
+    }
+    handle {
+        reverse_proxy web:3000 172.31.18.170:3000 {
+            lb_policy round_robin
+            health_uri /
+            health_interval 10s
+        }
+    }
+}

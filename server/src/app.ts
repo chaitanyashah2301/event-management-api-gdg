@@ -4,11 +4,13 @@ import { errorHandler } from "./middlewares/error.middleware";
 import eventRoutes from "./routes/event.routes";
 import registrationRoutes from "./routes/registration.routes";
 import analyticsRoutes from "./routes/analytics.routes";
+import os from "os";
+
 
 const app = express();
 
 app.use(express.json());
-
+app.get("/api/health", (_req, res) => res.json({ status: "ok", instance: os.hostname() }));
 app.use("/api/registrations", registrationRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
