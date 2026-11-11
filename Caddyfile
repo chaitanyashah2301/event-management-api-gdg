@@ -1,4 +1,4 @@
-www.chaitanyashah.dev, chaitanyashah.dev {
+www.gather.chaitanyashah.dev, gather.chaitanyashah.dev {
     handle /api/* {
         reverse_proxy api:5000 172.31.18.170:5000 {
             lb_policy round_robin
